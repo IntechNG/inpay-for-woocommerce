@@ -3,7 +3,7 @@ Contributors: intechdevelopers, arowolodaniel
 Donate link: https://intechdevelopers.com/donate
 Tags: woocommerce, payments, nigeria, bank-transfer, pay-id
 Requires at least: 6.2
-Tested up to: 6.6
+Tested up to: 6.8
 Requires PHP: 7.4
 Stable tag: 0.1.0
 License: GPLv2 or later
