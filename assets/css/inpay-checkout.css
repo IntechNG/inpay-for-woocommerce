@@ -1,0 +1,312 @@
+/**
+ * iNPAY Checkout Payment Page Styles
+ * Theme-compatible and responsive design
+ */
+
+/* Hide WooCommerce default order summary to avoid duplication */
+.woocommerce-order-details,
+.woocommerce-order-details__title,
+.woocommerce-order-overview,
+.woocommerce-order-overview__order,
+.woocommerce-order-overview__date,
+.woocommerce-order-overview__total,
+.woocommerce-order-overview__payment-method {
+    display: none !important;
+}
+
+/* Hide WooCommerce order pay page default summary */
+.checkout-pay-page .woocommerce-order-details,
+.checkout-pay-page .woocommerce-order-overview {
+    display: none !important;
+}
+
+/* Hide WooCommerce order summary on pay-for-order page when using iNPAY */
+body.woocommerce-page .woocommerce-order-details,
+body.woocommerce-page .woocommerce-order-overview,
+body.woocommerce-page .woocommerce-order-details__title,
+body.woocommerce-page .woocommerce-order-overview__order,
+body.woocommerce-page .woocommerce-order-overview__date,
+body.woocommerce-page .woocommerce-order-overview__total,
+body.woocommerce-page .woocommerce-order-overview__payment-method {
+    display: none !important;
+}
+
+/* Hide any additional order summary elements that might appear */
+.woocommerce .woocommerce-order-details,
+.woocommerce .woocommerce-order-overview,
+.woocommerce table.order_details,
+.woocommerce .order_details {
+    display: none !important;
+}
+
+/* Container and Layout */
+.inpay-checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Order Summary Section */
+.inpay-order-summary {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.inpay-order-summary h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #212529;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 12px;
+}
+
+.inpay-order-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+}
+
+.inpay-order-item {
+    text-align: center;
+}
+
+.inpay-order-item-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.inpay-order-item-value {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #212529;
+}
+
+.inpay-order-item-value.inpay-amount {
+    color: #28a745;
+    font-size: 18px;
+}
+
+/* Payment Instructions */
+.inpay-payment-instructions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #e7f3ff;
+    border: 1px solid #b8daff;
+    border-radius: 6px;
+    color: #004085;
+}
+
+.inpay-payment-instructions img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.inpay-payment-instructions p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Action Buttons */
+.inpay-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.inpay-pay-button {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+}
+
+.inpay-pay-button:hover {
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.inpay-pay-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+.inpay-pay-button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.inpay-pay-button .inpay-loading {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.inpay-pay-button.loading .inpay-loading {
+    display: block;
+}
+
+.inpay-cancel-button {
+    background: transparent;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: block;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inpay-cancel-button:hover {
+    background: #f8f9fa;
+    border-color: #adb5bd;
+    color: #495057;
+    text-decoration: none;
+}
+
+/* Loading Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .inpay-checkout-container {
+        margin: 0 16px;
+        padding: 20px;
+    }
+    
+    .inpay-order-details {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .inpay-action-buttons {
+        gap: 10px;
+    }
+    
+    .inpay-pay-button {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    
+    .inpay-cancel-button {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inpay-checkout-container {
+        margin: 0 12px;
+        padding: 16px;
+    }
+    
+    .inpay-order-details {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .inpay-order-summary {
+        padding: 16px;
+    }
+    
+    .inpay-payment-instructions {
+        padding: 12px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+/* Theme Compatibility Overrides */
+.inpay-checkout-container * {
+    box-sizing: border-box;
+}
+
+/* Ensure buttons work with various themes */
+.inpay-pay-button,
+.inpay-cancel-button {
+    font-family: inherit;
+    line-height: 1.5;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .inpay-pay-button {
+        background: #000000;
+        border: 2px solid #ffffff;
+    }
+    
+    .inpay-cancel-button {
+        border: 2px solid #000000;
+        color: #000000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .inpay-pay-button,
+    .inpay-cancel-button {
+        transition: none;
+    }
+    
+    .inpay-pay-button:hover {
+        transform: none;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(0deg); }
+    }
+}
