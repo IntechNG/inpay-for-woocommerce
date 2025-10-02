@@ -92,8 +92,16 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			if ( function_exists( 'wc_back_link' ) ) {
 				wc_back_link( __( 'Return to payments', 'inpay-checkout' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) );
 			}
-			?>
+		?>
 		</h2>
+
+		<p style="margin-top:0;">
+			<a href="https://intechdevelopers.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'By iNTECH Developers', 'inpay-checkout' ); ?></a>
+			<span style="margin: 0 8px;">|</span>
+			<a href="https://dev.inpaycheckout.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'API Docs', 'inpay-checkout' ); ?></a>
+			<span style="margin: 0 8px;">|</span>
+			<a href="https://github.com/IntechNG/inpay-for-woocommerce/discussions" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Community Support', 'inpay-checkout' ); ?></a>
+		</p>
 
 		<?php if ( $this->method_description ) : ?>
 		<p><?php echo wp_kses_post( $this->method_description ); ?></p>
