@@ -51,8 +51,8 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 	 */
 	public function __construct() {
 		$this->id                 = 'inpay_checkout';
-		$this->method_title       = __( 'iNPAY Checkout', 'inpay-for-woocommerce' );
-		$this->method_description = __( 'Accept Pay ID and bank transfer payments with iNPAY Checkout.', 'inpay-for-woocommerce' );
+		$this->method_title       = __( 'iNPAY Checkout', 'inpay-checkout-for-woocommerce' );
+		$this->method_description = __( 'Accept Pay ID and bank transfer payments with iNPAY Checkout.', 'inpay-checkout-for-woocommerce' );
 		$this->has_fields         = false;
 		$this->supports           = array( 'products' );
 		$this->icon               = INPAY_CHECKOUT_URL . '/assets/images/inpay.png';
@@ -90,17 +90,17 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			<?php echo esc_html( $this->get_method_title() ); ?>
 			<?php
 			if ( function_exists( 'wc_back_link' ) ) {
-				wc_back_link( __( 'Return to payments', 'inpay-for-woocommerce' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) );
+				wc_back_link( __( 'Return to payments', 'inpay-checkout-for-woocommerce' ), admin_url( 'admin.php?page=wc-settings&tab=checkout' ) );
 			}
 		?>
 		</h2>
 
 		<p style="margin-top:0;">
-			<a href="https://intechdevelopers.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'By iNTECH Developers', 'inpay-for-woocommerce' ); ?></a>
+			<a href="https://intechdevelopers.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'By iNTECH Developers', 'inpay-checkout-for-woocommerce' ); ?></a>
 			<span style="margin: 0 8px;">|</span>
-			<a href="https://dev.inpaycheckout.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'API Docs', 'inpay-for-woocommerce' ); ?></a>
+			<a href="https://dev.inpaycheckout.com" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'API Docs', 'inpay-checkout-for-woocommerce' ); ?></a>
 			<span style="margin: 0 8px;">|</span>
-			<a href="https://github.com/IntechNG/inpay-for-woocommerce/discussions" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Community Support', 'inpay-for-woocommerce' ); ?></a>
+			<a href="https://github.com/IntechNG/inpay-checkout-for-woocommerce/discussions" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Community Support', 'inpay-checkout-for-woocommerce' ); ?></a>
 		</p>
 
 		<?php if ( $this->method_description ) : ?>
@@ -109,8 +109,8 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 
 		<div class="notice notice-info" style="margin: 15px 0;">
 			<p>
-				<strong><?php esc_html_e( 'Webhook configuration', 'inpay-for-woocommerce' ); ?></strong><br />
-				<?php esc_html_e( 'Copy the URL below into your iNPAY dashboard so payment notifications are delivered. iNPAY expects your endpoint to return HTTP 200 when the payload is accepted.', 'inpay-for-woocommerce' ); ?>
+				<strong><?php esc_html_e( 'Webhook configuration', 'inpay-checkout-for-woocommerce' ); ?></strong><br />
+				<?php esc_html_e( 'Copy the URL below into your iNPAY dashboard so payment notifications are delivered. iNPAY expects your endpoint to return HTTP 200 when the payload is accepted.', 'inpay-checkout-for-woocommerce' ); ?>
 			</p>
 			<code style="display: inline-block; padding: 6px 10px; background: #fff; border: 1px solid #ccd0d4; border-radius: 3px;"><?php echo esc_html( $webhook_url ); ?></code>
 		</div>
@@ -127,41 +127,41 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 	public function init_form_fields() {
 		$this->form_fields = array(
 			'enabled'        => array(
-				'title'       => __( 'Enable/Disable', 'inpay-for-woocommerce' ),
-				'label'       => __( 'Enable iNPAY Checkout', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Enable/Disable', 'inpay-checkout-for-woocommerce' ),
+				'label'       => __( 'Enable iNPAY Checkout', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'checkbox',
-				'description' => __( 'Enable iNPAY Checkout as a payment option.', 'inpay-for-woocommerce' ),
+				'description' => __( 'Enable iNPAY Checkout as a payment option.', 'inpay-checkout-for-woocommerce' ),
 				'default'     => 'no',
 			),
 			'title'          => array(
-				'title'       => __( 'Title', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Title', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'Controls the payment method title seen during checkout.', 'inpay-for-woocommerce' ),
-				'default'     => __( 'iNPAY Checkout', 'inpay-for-woocommerce' ),
+				'description' => __( 'Controls the payment method title seen during checkout.', 'inpay-checkout-for-woocommerce' ),
+				'default'     => __( 'iNPAY Checkout', 'inpay-checkout-for-woocommerce' ),
 			),
 			'description'    => array(
-				'title'       => __( 'Description', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Description', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'textarea',
-				'description' => __( 'Payment method description shown on checkout forms.', 'inpay-for-woocommerce' ),
-				'default'     => __( 'Pay securely using iNPAY Checkout.', 'inpay-for-woocommerce' ),
+				'description' => __( 'Payment method description shown on checkout forms.', 'inpay-checkout-for-woocommerce' ),
+				'default'     => __( 'Pay securely using iNPAY Checkout.', 'inpay-checkout-for-woocommerce' ),
 			),
 			'public_key'     => array(
-				'title'       => __( 'Public Key', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Public Key', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'text',
-				'description' => __( 'Your iNPAY public key.', 'inpay-for-woocommerce' ),
+				'description' => __( 'Your iNPAY public key.', 'inpay-checkout-for-woocommerce' ),
 				'default'     => '',
 			),
 			'secret_key'     => array(
-				'title'       => __( 'Secret Key', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Secret Key', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'password',
-				'description' => __( 'Your iNPAY secret key.', 'inpay-for-woocommerce' ),
+				'description' => __( 'Your iNPAY secret key.', 'inpay-checkout-for-woocommerce' ),
 				'default'     => '',
 			),
 			'enable_logging' => array(
-				'title'       => __( 'Logging', 'inpay-for-woocommerce' ),
-				'label'       => __( 'Enable debug logging', 'inpay-for-woocommerce' ),
+				'title'       => __( 'Logging', 'inpay-checkout-for-woocommerce' ),
+				'label'       => __( 'Enable debug logging', 'inpay-checkout-for-woocommerce' ),
 				'type'        => 'checkbox',
-				'description' => __( 'Logs iNPAY Checkout events to WooCommerce > Status > Logs.', 'inpay-for-woocommerce' ),
+				'description' => __( 'Logs iNPAY Checkout events to WooCommerce > Status > Logs.', 'inpay-checkout-for-woocommerce' ),
 				'default'     => 'no',
 			),
 		);
@@ -185,11 +185,11 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 		}
 
 		if ( ! $this->public_key || ! $this->secret_key ) {
-			printf( '<div class="error"><p>%s</p></div>', esc_html__( 'Enter your iNPAY public and secret keys to start accepting payments.', 'inpay-for-woocommerce' ) );
+			printf( '<div class="error"><p>%s</p></div>', esc_html__( 'Enter your iNPAY public and secret keys to start accepting payments.', 'inpay-checkout-for-woocommerce' ) );
 		}
 
 		if ( INPAY_CHECKOUT_SUPPORTED_CURRENCY !== get_woocommerce_currency() ) {
-			printf( '<div class="error"><p>%s</p></div>', esc_html__( 'iNPAY Checkout only supports Nigerian Naira (NGN). Update your store currency to enable the gateway.', 'inpay-for-woocommerce' ) );
+			printf( '<div class="error"><p>%s</p></div>', esc_html__( 'iNPAY Checkout only supports Nigerian Naira (NGN). Update your store currency to enable the gateway.', 'inpay-checkout-for-woocommerce' ) );
 		}
 	}
 
@@ -285,7 +285,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 				'ajaxUrl'     => WC()->api_request_url( 'wc_gateway_inpay_checkout' ),
 				'returnUrl'   => wc_get_checkout_url(),
 				'logoUrl'     => INPAY_CHECKOUT_URL . '/assets/images/inpay.png',
-				'amountError' => __( 'Invalid payment amount.', 'inpay-for-woocommerce' ),
+				'amountError' => __( 'Invalid payment amount.', 'inpay-checkout-for-woocommerce' ),
 			);
 		}
 
@@ -358,12 +358,12 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			'orderId'       => $order->get_id(),
 			'nonce'         => wp_create_nonce( 'inpay_checkout_verify_' . $order->get_id() ),
 			'metadata'      => wp_json_encode( $metadata ),
-			'amountError'   => __( 'Invalid payment amount.', 'inpay-for-woocommerce' ),
+			'amountError'   => __( 'Invalid payment amount.', 'inpay-checkout-for-woocommerce' ),
 			'logoUrl'       => INPAY_CHECKOUT_URL . '/assets/images/inpay.png',
 			'ajaxUrl'       => WC()->api_request_url( 'wc_gateway_inpay_checkout' ),
 			'orderUrl'      => $this->get_return_url( $order ),
 			'cancelUrl'     => $order->get_cancel_order_url(),
-			'payButtonText' => __( 'Pay with iNPAY', 'inpay-for-woocommerce' ),
+			'payButtonText' => __( 'Pay with iNPAY', 'inpay-checkout-for-woocommerce' ),
 			'amountText'    => wc_price( $order->get_total(), array( 'currency' => $order->get_currency() ) ),
 		);
 	}
@@ -388,23 +388,23 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 		<div class="inpay-checkout-container">
 			<!-- Order Summary -->
 			<div class="inpay-order-summary">
-				<h3><?php esc_html_e( 'Order Summary', 'inpay-for-woocommerce' ); ?></h3>
+				<h3><?php esc_html_e( 'Order Summary', 'inpay-checkout-for-woocommerce' ); ?></h3>
 				<div class="inpay-order-details">
 					<div class="inpay-order-item">
-						<span class="inpay-order-item-label"><?php esc_html_e( 'Order Number', 'inpay-for-woocommerce' ); ?></span>
+						<span class="inpay-order-item-label"><?php esc_html_e( 'Order Number', 'inpay-checkout-for-woocommerce' ); ?></span>
 						<span class="inpay-order-item-value">#<?php echo esc_html( $order->get_order_number() ); ?></span>
 					</div>
 					<div class="inpay-order-item">
-						<span class="inpay-order-item-label"><?php esc_html_e( 'Date', 'inpay-for-woocommerce' ); ?></span>
+						<span class="inpay-order-item-label"><?php esc_html_e( 'Date', 'inpay-checkout-for-woocommerce' ); ?></span>
 						<span class="inpay-order-item-value"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></span>
 					</div>
 					<div class="inpay-order-item">
-						<span class="inpay-order-item-label"><?php esc_html_e( 'Total', 'inpay-for-woocommerce' ); ?></span>
+						<span class="inpay-order-item-label"><?php esc_html_e( 'Total', 'inpay-checkout-for-woocommerce' ); ?></span>
 						<span class="inpay-order-item-value inpay-amount"><?php echo wp_kses_post( wc_price( $order->get_total(), array( 'currency' => $order->get_currency() ) ) ); ?></span>
 					</div>
 					<div class="inpay-order-item">
-						<span class="inpay-order-item-label"><?php esc_html_e( 'Payment Method', 'inpay-for-woocommerce' ); ?></span>
-						<span class="inpay-order-item-value"><?php esc_html_e( 'iNPAY Checkout', 'inpay-for-woocommerce' ); ?></span>
+						<span class="inpay-order-item-label"><?php esc_html_e( 'Payment Method', 'inpay-checkout-for-woocommerce' ); ?></span>
+						<span class="inpay-order-item-value"><?php esc_html_e( 'iNPAY Checkout', 'inpay-checkout-for-woocommerce' ); ?></span>
 					</div>
 				</div>
 			</div>
@@ -412,17 +412,17 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			<!-- Payment Instructions -->
 			<div class="inpay-payment-instructions">
 				<img src="<?php echo esc_url( INPAY_CHECKOUT_URL . '/assets/images/inpay.png' ); ?>" alt="iNPAY" />
-				<p><?php esc_html_e( 'Click the button below to complete your payment with iNPAY Checkout.', 'inpay-for-woocommerce' ); ?></p>
+				<p><?php esc_html_e( 'Click the button below to complete your payment with iNPAY Checkout.', 'inpay-checkout-for-woocommerce' ); ?></p>
 			</div>
 
 			<!-- Action Buttons -->
 			<div class="inpay-action-buttons">
 				<button class="inpay-pay-button" id="inpay-checkout-button">
 					<span class="inpay-loading"></span>
-					<?php esc_html_e( 'Pay with iNPAY', 'inpay-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Pay with iNPAY', 'inpay-checkout-for-woocommerce' ); ?>
 				</button>
 				<a class="inpay-cancel-button" href="<?php echo esc_url( $order->get_cancel_order_url() ); ?>">
-					<?php esc_html_e( 'Cancel order & restore cart', 'inpay-for-woocommerce' ); ?>
+					<?php esc_html_e( 'Cancel order & restore cart', 'inpay-checkout-for-woocommerce' ); ?>
 				</a>
 			</div>
 		</div>
@@ -446,28 +446,28 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 
 		if ( ! $reference || ! $order_id || ! wp_verify_nonce( $nonce, 'inpay_checkout_verify_' . $order_id ) ) {
 			$this->log( 'Verification request rejected: invalid payload.' );
-			wp_send_json_error( array( 'message' => __( 'Invalid verification request.', 'inpay-for-woocommerce' ) ), 400 );
+			wp_send_json_error( array( 'message' => __( 'Invalid verification request.', 'inpay-checkout-for-woocommerce' ) ), 400 );
 		}
 
 		$order = wc_get_order( $order_id );
 
 		if ( ! $order || $order->get_payment_method() !== $this->id ) {
 			$this->log( 'Verification request rejected: order mismatch.' );
-			wp_send_json_error( array( 'message' => __( 'Unable to verify this payment.', 'inpay-for-woocommerce' ) ), 404 );
+			wp_send_json_error( array( 'message' => __( 'Unable to verify this payment.', 'inpay-checkout-for-woocommerce' ) ), 404 );
 		}
 
 		$result = $this->verify_transaction( $reference );
 
 		if ( is_wp_error( $result ) ) {
 			$this->log( 'Verification error: ' . $result->get_error_message() );
-			wp_send_json_error( array( 'message' => __( 'We could not verify the payment. Please try again.', 'inpay-for-woocommerce' ) ), 502 );
+			wp_send_json_error( array( 'message' => __( 'We could not verify the payment. Please try again.', 'inpay-checkout-for-woocommerce' ) ), 502 );
 		}
 
 		list( $transaction, $reason ) = $result;
 
 		if ( ! $this->is_transaction_successful( $transaction ) ) {
 			$this->log( sprintf( 'Verification failed for %s: %s', $reference, $reason ) );
-			wp_send_json_error( array( 'message' => __( 'Payment not completed. Please try again.', 'inpay-for-woocommerce' ) ), 402 );
+			wp_send_json_error( array( 'message' => __( 'Payment not completed. Please try again.', 'inpay-checkout-for-woocommerce' ) ), 402 );
 		}
 
 		$stored_reference   = $order->get_meta( '_inpay_checkout_reference' );
@@ -477,7 +477,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 
 		if ( $stored_reference && $metadata_reference && $stored_reference !== $metadata_reference ) {
 			$this->log( sprintf( 'Reference mismatch detected. stored=%1$s metadata=%2$s txn=%3$s order=%4$d', $stored_reference, $metadata_reference, $transaction_ref, $order_id ) );
-			wp_send_json_error( array( 'message' => __( 'Payment reference mismatch.', 'inpay-for-woocommerce' ) ), 409 );
+			wp_send_json_error( array( 'message' => __( 'Payment reference mismatch.', 'inpay-checkout-for-woocommerce' ) ), 409 );
 		}
 
 		if ( empty( $stored_reference ) && $metadata_reference ) {
@@ -489,7 +489,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 
 		if ( is_wp_error( $status ) ) {
 			$this->log( 'Order finalization error: ' . $status->get_error_message() );
-			wp_send_json_error( array( 'message' => __( 'Payment verified but the order could not be updated. Contact support.', 'inpay-for-woocommerce' ) ), 500 );
+			wp_send_json_error( array( 'message' => __( 'Payment verified but the order could not be updated. Contact support.', 'inpay-checkout-for-woocommerce' ) ), 500 );
 		}
 
 		$this->log( sprintf( 'Payment verified for order %d via checkout confirmation.', $order_id ) );
@@ -620,7 +620,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 	 */
 	protected function verify_transaction( $reference ) {
 		if ( ! $this->secret_key ) {
-			return new WP_Error( 'inpay_missing_secret', __( 'Missing iNPAY secret key.', 'inpay-for-woocommerce' ) );
+			return new WP_Error( 'inpay_missing_secret', __( 'Missing iNPAY secret key.', 'inpay-checkout-for-woocommerce' ) );
 		}
 
 		$endpoints = array(
@@ -677,7 +677,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			return array( $transaction, $reason );
 		}
 
-		return new WP_Error( 'inpay_verification_failed', __( 'Unable to verify transaction with iNPAY.', 'inpay-for-woocommerce' ) );
+		return new WP_Error( 'inpay_verification_failed', __( 'Unable to verify transaction with iNPAY.', 'inpay-checkout-for-woocommerce' ) );
 	}
 
 	/**
@@ -752,22 +752,22 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 
 		if ( $paid_amount < $order_amount ) {
 			$this->log( sprintf( 'Amount mismatch for order %d. paid=%d expected=%d reference=%s', $order->get_id(), $paid_amount, $order_amount, $reference ) );
-			$order->update_status( 'on-hold', __( 'iNPAY payment completed with a lower amount than expected.', 'inpay-for-woocommerce' ) );
+			$order->update_status( 'on-hold', __( 'iNPAY payment completed with a lower amount than expected.', 'inpay-checkout-for-woocommerce' ) );
 			$order->save();
 
-			return new WP_Error( 'inpay_amount_mismatch', __( 'Payment amount mismatch.', 'inpay-for-woocommerce' ) );
+			return new WP_Error( 'inpay_amount_mismatch', __( 'Payment amount mismatch.', 'inpay-checkout-for-woocommerce' ) );
 		}
 
 		if ( $order->get_currency() !== INPAY_CHECKOUT_SUPPORTED_CURRENCY ) {
-			$order->update_status( 'on-hold', __( 'iNPAY payment currency differs from the order currency.', 'inpay-for-woocommerce' ) );
+			$order->update_status( 'on-hold', __( 'iNPAY payment currency differs from the order currency.', 'inpay-checkout-for-woocommerce' ) );
 			$order->save();
 
-			return new WP_Error( 'inpay_currency_mismatch', __( 'Payment currency mismatch.', 'inpay-for-woocommerce' ) );
+			return new WP_Error( 'inpay_currency_mismatch', __( 'Payment currency mismatch.', 'inpay-checkout-for-woocommerce' ) );
 		}
 
 		$order->update_meta_data( '_inpay_checkout_transaction', wp_json_encode( $transaction ) );
 		/* translators: %s: iNPAY transaction reference. */
-		$order->add_order_note( sprintf( __( 'iNPAY Checkout payment completed. Reference: %s', 'inpay-for-woocommerce' ), $reference ) );
+		$order->add_order_note( sprintf( __( 'iNPAY Checkout payment completed. Reference: %s', 'inpay-checkout-for-woocommerce' ), $reference ) );
 		$order->payment_complete( $reference );
 
 		if ( function_exists( 'WC' ) && isset( WC()->cart ) && WC()->cart ) {

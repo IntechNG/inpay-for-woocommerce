@@ -12,7 +12,7 @@
  * Requires at least: 6.2
  * Requires PHP: 7.4
  * WC requires at least: 8.0
- * Text Domain: inpay-for-woocommerce
+ * Text Domain: inpay-checkout-for-woocommerce
  * Domain Path: /languages
  */
 
@@ -71,7 +71,7 @@ add_filter( 'woocommerce_payment_gateways', 'inpay_checkout_add_gateway' );
  */
 function inpay_checkout_plugin_action_links( $links ) {
 	$settings_link = array(
-		'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=inpay_checkout' ) ) . '">' . esc_html__( 'Settings', 'inpay-for-woocommerce' ) . '</a>',
+		'settings' => '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout&section=inpay_checkout' ) ) . '">' . esc_html__( 'Settings', 'inpay-checkout-for-woocommerce' ) . '</a>',
 	);
 
 	return array_merge( $settings_link, $links );
@@ -108,7 +108,7 @@ add_action( 'woocommerce_blocks_loaded', 'inpay_checkout_register_blocks_support
  * Show a notice when WooCommerce is missing.
  */
 function inpay_checkout_wc_missing_notice() {
-	echo '<div class="error"><p><strong>' . esc_html__( 'iNPAY Checkout requires WooCommerce to be activated.', 'inpay-for-woocommerce' ) . '</strong></p></div>';
+	echo '<div class="error"><p><strong>' . esc_html__( 'iNPAY Checkout requires WooCommerce to be activated.', 'inpay-checkout-for-woocommerce' ) . '</strong></p></div>';
 }
 
 /**
@@ -116,7 +116,7 @@ function inpay_checkout_wc_missing_notice() {
  */
 function inpay_checkout_wc_version_notice() {
 	/* translators: %s: minimum supported WooCommerce version. */
-	$version_message = sprintf( __( 'iNPAY Checkout requires WooCommerce %s or newer.', 'inpay-for-woocommerce' ), INPAY_CHECKOUT_MIN_WC_VERSION );
+	$version_message = sprintf( __( 'iNPAY Checkout requires WooCommerce %s or newer.', 'inpay-checkout-for-woocommerce' ), INPAY_CHECKOUT_MIN_WC_VERSION );
 	echo '<div class="error"><p><strong>' . esc_html( $version_message ) . '</strong></p></div>';
 }
 

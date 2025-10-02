@@ -26,7 +26,7 @@ iNPAY Checkout for WooCommerce enables Nigerian merchants to accept Pay ID and b
 
 == Installation ==
 
-1. Upload the plugin folder `inpay-for-woocommerce` to the `/wp-content/plugins/` directory, or install the ZIP via **Plugins → Add New → Upload Plugin**.
+1. Upload the plugin folder `inpay-checkout-for-woocommerce` to the `/wp-content/plugins/` directory, or install the ZIP via **Plugins → Add New → Upload Plugin**.
 2. Activate the plugin through the **Plugins** screen in WordPress.
 3. Navigate to **WooCommerce → Settings → Payments** and enable **iNPAY Checkout**.
 
@@ -42,7 +42,7 @@ The gateway settings screen shows a webhook URL. Copy it to the iNPAY Dashboard 
 The gateway currently supports payments in Nigerian Naira (NGN).
 
 = Where can I get help? =
-Open a discussion on [GitHub](https://github.com/IntechNG/inpay-for-woocommerce/discussions) or email [support@inpaycheckout.com](mailto:support@inpaycheckout.com).
+Open a discussion on [GitHub](https://github.com/IntechNG/inpay-checkout-for-woocommerce/discussions) or email [support@inpaycheckout.com](mailto:support@inpaycheckout.com).
 
 == Screenshots ==
 1. iNPAY Checkout settings page in WooCommerce.

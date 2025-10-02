@@ -11,7 +11,7 @@ Accept Pay ID and bank transfer payments on WooCommerce stores using [iNPAY Chec
 
 ## Installation
 
-1. Download or clone this repository into `wp-content/plugins/inpay-for-woocommerce`.
+1. Download or clone this repository into `wp-content/plugins/inpay-checkout-for-woocommerce`.
 2. In wp-admin, go to **Plugins → Installed Plugins** and activate **iNPAY Checkout for WooCommerce**.
 3. Navigate to **WooCommerce → Settings → Payments** and enable **iNPAY Checkout**.
 
