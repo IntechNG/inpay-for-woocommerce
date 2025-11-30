@@ -5,7 +5,7 @@ Tags: woocommerce, payments, nigeria, bank-transfer, pay-id
 Requires at least: 6.2
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,10 +51,19 @@ Open a discussion on [GitHub](https://github.com/IntechNG/inpay-checkout-for-woo
 
 == Changelog ==
 
+= 0.1.1 =
+* Fix payment reference generation to ensure 100% global uniqueness across all WordPress installations
+* Add merchant identifier to prevent reference collisions between different sites
+* Upgrade to microsecond precision timestamps for better uniqueness
+* Improve reference format: merchant_id_order_id_microtime_uniqid_random
+
 = 0.1.0 =
 * Initial release.
 
 == Upgrade Notice ==
+
+= 0.1.1 =
+Important bug fix: This update fixes payment reference uniqueness issues that could cause payment initialization failures. All users should update immediately.
 
 = 0.1.0 =
 Initial public release of the iNPAY Checkout gateway.

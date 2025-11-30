@@ -2,7 +2,7 @@
 /**
  * Plugin Name: iNPAY Checkout for WooCommerce
  * Description: Accept Pay ID and bank transfer payments via iNPAY Checkout.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Author: iNTECH Developers
  * Author URI: https://intechdevelopers.com
  * Plugin URI: https://dev.inpaycheckout.com
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'INPAY_CHECKOUT_MAIN_FILE', __FILE__ );
-define( 'INPAY_CHECKOUT_VERSION', '0.1.0' );
+define( 'INPAY_CHECKOUT_VERSION', '0.1.1' );
 define( 'INPAY_CHECKOUT_URL', untrailingslashit( plugins_url( '/', __FILE__ ) ) );
 
 define( 'INPAY_CHECKOUT_MIN_WC_VERSION', '8.0.0' );
