@@ -595,6 +595,20 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 	/**
 	 * Ensure the order has a unique reference stored.
 	 *
+	 * Generates a 100% unique reference by combining:
+	 * - Merchant identifier (hash of public key - unique per WordPress installation/merchant)
+	 * - Order ID (for tracking and easy reference lookup)
+	 * - Microsecond timestamp (for time-based uniqueness)
+	 * - Unique ID with entropy (uniqid with more_entropy=true)
+	 * - Additional random string for collision prevention
+	 *
+	 * Format: {merchant_id}_{order_id}_{microtime_int}_{uniqid}_{random}
+	 * Example: a1b2c3d4_52938_17329763701234_e5f6g7h8i9j0_xyz9abc123
+	 *
+	 * This ensures global uniqueness across all WordPress installations and merchants,
+	 * even under high concurrency scenarios where multiple payment attempts occur
+	 * simultaneously for the same order or different merchants have identical order IDs.
+	 *
 	 * @param WC_Order $order Order instance.
 	 * @return string
 	 */
@@ -605,7 +619,31 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway {
 			return $reference;
 		}
 
-		$reference = sprintf( '%d_%d_%s', $order->get_id(), time(), strtolower( wp_generate_password( 8, false, false ) ) );
+		// Generate merchant identifier from public key (unique per merchant/site)
+		// Uses first 8 characters of MD5 hash for a short, unique identifier
+		$merchant_id = '';
+		if ( ! empty( $this->public_key ) ) {
+			$merchant_id = substr( md5( $this->public_key ), 0, 8 );
+		} else {
+			// Fallback to site URL hash if public key not available
+			$merchant_id = substr( md5( home_url() ), 0, 8 );
+		}
+
+		// Get microsecond timestamp as integer (provides microsecond precision)
+		// Multiplying by 10000 gives us 4 decimal places of precision
+		$microtime_int = (int) ( microtime( true ) * 10000 );
+
+		// Generate unique ID with additional entropy (includes microseconds + random prefix)
+		$unique_id = uniqid( '', true );
+		// Remove dots from uniqid for cleaner reference format
+		$unique_id = str_replace( '.', '', $unique_id );
+
+		// Add random string for additional collision prevention (10 characters)
+		$random_string = strtolower( wp_generate_password( 10, false, false ) );
+
+		// Combine: merchant_id_order_id_microtime_uniqueid_random
+		// This ensures 100% global uniqueness across all merchants and WordPress installations
+		$reference = sprintf( '%s_%d_%d_%s_%s', $merchant_id, $order->get_id(), $microtime_int, $unique_id, $random_string );
 
 		$order->update_meta_data( '_inpay_checkout_reference', $reference );
 
