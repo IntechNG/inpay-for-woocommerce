@@ -2,11 +2,12 @@
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType {
+class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
+{
 
 	/**
 	 * Gateway instance.
@@ -25,8 +26,9 @@ class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
 	/**
 	 * Set up block settings.
 	 */
-	public function initialize() {
-		$this->settings = get_option( 'woocommerce_inpay_checkout_settings', array() );
+	public function initialize()
+	{
+		$this->settings = get_option('woocommerce_inpay_checkout_settings', array());
 		$this->gateway_instance = null;
 	}
 
@@ -35,33 +37,35 @@ class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
 	 *
 	 * @return bool
 	 */
-	public function is_active() {
+	public function is_active()
+	{
 		$payment_gateways = WC()->payment_gateways();
 
 		$gateways = $payment_gateways->payment_gateways();
 
-		if ( ! isset( $gateways[ $this->name ] ) ) {
+		if (!isset($gateways[$this->name])) {
 			return false;
 		}
 
-		return $gateways[ $this->name ]->is_available();
-}
+		return $gateways[$this->name]->is_available();
+	}
 
 	/**
 	 * Register frontend scripts.
 	 *
 	 * @return string[]
 	 */
-	public function get_payment_method_script_handles() {
+	public function get_payment_method_script_handles()
+	{
 		$script_path = 'assets/js/blocks/frontend/inpay-checkout.js';
-		$script_url  = plugins_url( $script_path, INPAY_CHECKOUT_MAIN_FILE );
-		$asset_path  = plugin_dir_path( INPAY_CHECKOUT_MAIN_FILE ) . 'assets/js/blocks/frontend/inpay-checkout.asset.php';
+		$script_url = plugins_url($script_path, INPAY_CHECKOUT_MAIN_FILE);
+		$asset_path = plugin_dir_path(INPAY_CHECKOUT_MAIN_FILE) . 'assets/js/blocks/frontend/inpay-checkout.asset.php';
 
-		$asset = file_exists( $asset_path )
+		$asset = file_exists($asset_path)
 			? include $asset_path
 			: array(
-				'dependencies' => array( 'wc-blocks-registry', 'wc-settings', 'wp-element', 'wp-i18n' ),
-				'version'      => INPAY_CHECKOUT_VERSION,
+				'dependencies' => array('wc-blocks-registry', 'wc-settings', 'wp-element', 'wp-i18n'),
+				'version' => INPAY_CHECKOUT_VERSION,
 			);
 
 		wp_register_script(
@@ -72,7 +76,7 @@ class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
 			true
 		);
 
-		return array( 'wc-inpay-checkout-blocks' );
+		return array('wc-inpay-checkout-blocks');
 	}
 
 	/**
@@ -80,22 +84,25 @@ class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
 	 *
 	 * @return array
 	 */
-	public function get_payment_method_data() {
+	public function get_payment_method_data()
+	{
 		$gateway = $this->get_gateway();
 
-		if ( ! $gateway ) {
+		if (!$gateway) {
 			return array();
 		}
 
 		return array(
-			'title'             => $gateway->get_title(),
-			'description'       => $gateway->get_description(),
-			'supports'          => array_filter( $gateway->supports, array( $gateway, 'supports' ) ),
-			'logoUrl'           => INPAY_CHECKOUT_URL . '/assets/images/inpay.png',
-			'publicKey'         => $gateway->public_key,
-			'isEnabled'         => $gateway->is_available(),
-			'allowSavedCards'   => false,
-			'inlineScriptsUrls' => array( 'https://js.inpaycheckout.com/v1/inline.js' ),
+			'title' => $gateway->get_title(),
+			'description' => $gateway->get_description(),
+			'supports' => array_filter($gateway->supports, array($gateway, 'supports')),
+			'logoUrl' => INPAY_CHECKOUT_URL . '/assets/images/inpay.png',
+			'publicKey' => $gateway->public_key,
+			'isEnabled' => $gateway->is_available(),
+			'allowSavedCards' => false,
+			'checkoutMode' => $gateway->checkout_mode,
+			'paymentMethods' => !empty($gateway->payment_methods) ? $gateway->payment_methods : 'all',
+			'inlineScriptsUrls' => array('https://js.inpaycheckout.com/' . ($gateway->checkout_mode === 'v1' ? 'v1' : 'v2') . '/inline.js'),
 		);
 	}
 
@@ -104,16 +111,17 @@ class WC_Gateway_Inpay_Checkout_Blocks_Support extends AbstractPaymentMethodType
 	 *
 	 * @return WC_Gateway_Inpay_Checkout|false
 	 */
-	protected function get_gateway() {
-		if ( null !== $this->gateway_instance ) {
+	protected function get_gateway()
+	{
+		if (null !== $this->gateway_instance) {
 			return $this->gateway_instance;
 		}
 
 		$payment_gateways = WC()->payment_gateways();
-		$gateways         = $payment_gateways->payment_gateways();
-		$gateway          = isset( $gateways[ $this->name ] ) ? $gateways[ $this->name ] : false;
+		$gateways = $payment_gateways->payment_gateways();
+		$gateway = isset($gateways[$this->name]) ? $gateways[$this->name] : false;
 
-		if ( $gateway ) {
+		if ($gateway) {
 			$this->gateway_instance = $gateway;
 		}
 
