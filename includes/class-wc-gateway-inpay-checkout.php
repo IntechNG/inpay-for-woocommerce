@@ -73,8 +73,7 @@ class WC_Gateway_Inpay_Checkout extends WC_Payment_Gateway
 		$this->supports = array('products');
 		$this->icon = INPAY_CHECKOUT_URL . '/assets/images/inpay.png';
 
-		// Call parent constructor
-		parent::__construct();
+		// WooCommerce gateways typically do not require a parent constructor call
 
 		$this->init_form_fields();
 		$this->init_settings();
