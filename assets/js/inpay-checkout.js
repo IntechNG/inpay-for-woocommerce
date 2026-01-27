@@ -45,7 +45,7 @@ jQuery( function( $ ) {
 		loadSdk()
 			.then( function( Checkout ) {
 				const checkout = new Checkout();
-				checkout.checkout( {
+				const checkoutOptions = {
 					apiKey: params.publicKey,
 					amount: Number( params.amount ),
 					email: params.email,
@@ -65,7 +65,14 @@ jQuery( function( $ ) {
 					onError: function( error ) {
 						handleError( error );
 					},
-				} );
+				};
+
+				// V2 specific options
+				if ( params.checkoutMode === 'v2' && params.paymentMethods ) {
+					checkoutOptions.paymentMethods = params.paymentMethods;
+				}
+
+				checkout.checkout( checkoutOptions );
 			} )
 			.catch( function( error ) {
 				isLaunching = false;
@@ -84,8 +91,9 @@ jQuery( function( $ ) {
 		}
 
 		sdkPromise = new Promise( function( resolve, reject ) {
+			const version = params.checkoutMode === 'v1' ? 'v1' : 'v2';
 			const script = document.createElement( 'script' );
-			script.src = 'https://js.inpaycheckout.com/v1/inline.js';
+			script.src = 'https://js.inpaycheckout.com/' + version + '/inline.js';
 			script.onload = function() {
 				if ( window.iNPAY && window.iNPAY.InpayCheckout ) {
 					resolve( window.iNPAY.InpayCheckout );

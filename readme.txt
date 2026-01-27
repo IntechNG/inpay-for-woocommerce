@@ -5,7 +5,7 @@ Tags: woocommerce, payments, nigeria, bank-transfer, pay-id
 Requires at least: 6.2
 Tested up to: 6.6
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,12 @@ Open a discussion on [GitHub](https://github.com/IntechNG/inpay-checkout-for-woo
 3. iNPAY modal launched from the Checkout Block.
 
 == Changelog ==
+
+= 0.1.2 =
+* Add support for iNPAY Checkout V2 modal
+* Add "Checkout Mode" setting to switch between V1 and V2
+* Add "Payment Methods" setting for V2 to restrict available options (Card, Bank Transfer, PayID)
+* Improve WooCommerce Blocks integration with V2 support
 
 = 0.1.1 =
 * Fix payment reference generation to ensure 100% global uniqueness across all WordPress installations
